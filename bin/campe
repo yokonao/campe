@@ -1,0 +1,12 @@
+#!/bin/bash
+
+set -eo pipefail
+
+SCRIPT_DIR=$(cd $(dirname $0); pwd)
+CAMPE_PATH=$SCRIPT_DIR/../content
+
+if [[ $1 == "edit" ]] || [[ $1 == "e" ]]; then
+    emacs $CAMPE_PATH
+else
+    less $CAMPE_PATH
+fi
