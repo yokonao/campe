@@ -10,11 +10,9 @@ CAMPE_PATH=$SCRIPT_DIR/../content
 WORK_DIR=~/ScreenShots
 
 cd $WORK_DIR
-movs=$(find *.mov)
-echo $movs
 
-for fn in $(find *.mov); do
+find *.mov | while read fn
+do
     base=${fn%.*}
-    ffmpeg -i $fn -filter_complex "[0:v] fps=10,scale=640:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" "$base.gif"
-    rm $WORK_DIR/$fn
+    ffmpeg -i "$fn" -filter_complex "[0:v] fps=10,scale=640:-1,split [a][b];[a] palettegen [p];[b][p] paletteuse" "$base.gif"
 done
